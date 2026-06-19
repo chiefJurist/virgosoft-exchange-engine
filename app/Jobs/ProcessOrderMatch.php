@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\Order;
+use App\Services\OrderMatchingService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 
@@ -22,8 +23,9 @@ class ProcessOrderMatch implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(): void
+    public function handle(OrderMatchingService $service): void
     {
         //
+        $service->matchOrder($this->order);
     }
 }
