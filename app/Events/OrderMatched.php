@@ -32,7 +32,36 @@ class OrderMatched
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('channel-name'),
+            new PrivateChannel('user.' . $this->buyer->id),
+            new PrivateChannel('user.' . $this->seller->id)
         ];
+    }
+
+    public function broadcastWith(): array
+    {
+        return [
+            'trade' => [
+                'id' => $this->trade->id,
+                'symbol' => $this->trade->symbol,
+                'price' => $this->trade->price,
+                'amount' => $this->trade->amount,
+                'commission' => $this->trade->commission,
+            ],
+            'buyer' => [
+                'id' => $this->buyer->id,
+                'balance' => $this->buyer->fresh()->balance,
+                'assets' => $this->buyer->fresh()->assets,
+            ],
+            'seller' => [
+                'id' => $this->seller->id,
+                'balance' => $this->seller->fresh()->balance,
+                'assets' => $this->seller->fresh()->assets,
+            ],
+        ];
+    }
+
+    public function broadcastAs(): string
+    {
+        return 'OrderMatched';
     }
 }
