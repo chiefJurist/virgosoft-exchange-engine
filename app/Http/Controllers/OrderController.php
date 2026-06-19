@@ -119,4 +119,51 @@ class OrderController extends Controller
             ], 422);
         }
     }
+
+    public function cancel(Order $order)
+    {
+        Gate::authorize('cancel', $order);
+
+        try {
+            DB::transaction(function () use ($order) {
+                $order = Order::lockForUpdate()->find($order->id);
+
+                if ($order->status !== OrderStatus::Open) {
+                    throw new \Exception('Only open orders can be cancelled.');
+                }
+
+                if ($order->side === OrderSide::Buy) {
+                    $total = $order->price * $order->amount;
+                    $totalWithCommission = $total * 1.015;
+                    $user = User::lockForUpdate()->find($order->user_id);
+                    $user->increment('balance', $totalWithCommission);
+                } else {
+                    $amount = $order->amount;
+                    $amountWithCommision = $amount * 1.015;
+                    /** @disregard P1005 */
+                    $asset = Asset::where('user_id', $order->user_id)
+                        ->where('symbol', $order->symbol)
+                        ->lockForUpdate()
+                        ->first();
+                    $asset->decrement('locked_amount', $amount);
+                    $asset->increment('amount', $amountWithCommision);
+                }
+
+                $order->update(['status' => OrderStatus::Cancelled]);
+            });
+
+            return response()->json(['message' => 'Order cancelled successfully.']);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 422);
+        }
+    }
+    public function myOrders(Request $request)
+    {
+        /** @disregard P1005 */
+        $orders = Order::where('user_id', $request->user()->id)
+            ->orderByDesc('created_at')
+            ->get();
+
+        return OrderResource::collection($orders);
+    }
 }
