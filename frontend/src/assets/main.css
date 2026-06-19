@@ -1,35 +1,171 @@
 @import "tailwindcss";
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+.login-con{
+    @apply min-h-screen bg-gray-100 flex items-center justify-center;
 }
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+.login-subcon{
+    @apply p-8 w-full max-w-md;
 }
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+.login-title{
+    @apply text-3xl font-bold text-gray-800 p-4 mb-6;
 }
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+.login-error{
+    @apply bg-red-600 text-white p-3 text-lg rounded mb-4;
+}
+.login-input-label{
+    @apply block text-gray-600 font-semibold text-lg mb-2;
+}
+.login-input{
+    @apply w-full bg-blue-100 text-gray-500 focus:border-2 border-gray-400 p-3 rounded outline-none;
+}
+.login-btn{
+    @apply w-full bg-blue-600 hover:bg-blue-800 text-white p-3 rounded font-semibold cursor-pointer disabled:cursor-progress disabled:opacity-50 transition-all duration-400 ease-in-out;
+}
+.order-con{
+    @apply min-h-screen bg-gray-100 p-8;
+}
+.order-con-wrap{
+    @apply max-w-md md:max-w-lg mx-auto;
+}
+.order-title-con{
+    @apply flex justify-between items-center mb-8;
+}
+.order-title-text{
+    @apply text-2xl font-bold text-gray-800;
+}
+.order-title-link{
+    @apply hover:text-gray-500 bg-blue-600 hover:bg-blue-800 text-white px-4 py-2 rounded cursor-pointer transition-all duration-600 ease-in-out;
+;
+}
+.order-body-con{
+    @apply bg-gray-50 p-6 rounded-lg shadow;
+}
+.order-success{
+    @apply bg-green-500 text-white font-semibold p-3 rounded mb-6;
+}
+.order-error{
+    @apply bg-red-500 text-white font-semibold p-3 rounded mb-6;
+}
+.order-label{
+    @apply block text-gray-500 text-lg font-semibold mb-2;
+}
+.order-select{
+    @apply w-full bg-blue-50 text-gray-500 p-3 rounded;
+}
+.order-submit{
+    @apply w-full bg-blue-600 hover:bg-blue-800 text-white p-3 rounded font-semibold cursor-pointer disabled:cursor-progress disabled:opacity-50 transition-all duration-400 ease-in-out;
+}
+.order-volume-preview-con{
+    @apply mb-12 p-3 bg-gray-200 rounded;
+}
+.order-volume-preview-label{
+    @apply text-gray-600;
+}
+.order-volume-preview-total{
+    @apply text-gray-400 font-semibold;
+}
+.ovp-commission{
+    @apply text-gray-400 text-sm ml-2;
+}
+.profile-con{
+    @apply min-h-screen bg-gray-50 p-8;
+}
+.profile-header-con{
+    @apply flex justify-between items-center mb-8 flex-wrap;
+}
+.profile-header-title{
+    @apply text-2xl font-bold text-gray-800;
+}
+.profile-header-btn-one{
+    @apply bg-blue-600 hover:bg-blue-800 text-white px-4 py-2 rounded cursor-pointer transition-all duration-600 ease-in-out;
+}
+.profile-header-btn-two{
+    @apply bg-red-600 hover:bg-red-800 text-white px-4 py-2 rounded cursor-pointer transition-all duration-400 ease-in-out;
+}
+.profile-toast{
+    @apply fixed top-4 right-4 bg-green-500 text-white p-4 rounded shadow-lg z-50;
+}
+.profile-balances-con{
+    @apply grid grid-cols-1 md:grid-cols-3 gap-4 mb-8;
+}
+.profile-balance-con{
+    @apply bg-white p-4 shadow rounded-lg;
+}
+.profile-balance-type{
+    @apply text-gray-600 font-semibold;
+}
+.profile-balance-amt{
+    @apply text-gray-800 text-xl font-bold;
+}
+.profile-balance-locked{
+    @apply text-gray-500 text-xs;
+}
+.profile-orderbook-con{
+    @apply bg-white p-6 rounded-lg mb-8 shadow;
+}
+.profile-orderbook-head{
+    @apply flex justify-between items-center mb-4;
+}
+.profile-orderbook-title{
+    @apply text-gray-800 font-bold text-lg;
+}
+.profile-orderbook-side{
+    @apply text-gray-700 bg-gray-200 p-2 rounded cursor-pointer outline-none;
+}
+.profile-orderbook-body{
+    @apply sm:grid grid-cols-2 gap-5;
+}
+.profile-orderbook-side-title{
+    @apply text-gray-600 mb-2 font-semibold text-lg;
+}
+.profile-orderbook-side-head{
+    @apply flex justify-between text-sm text-gray-500 py-3;
+}
+.profile-orderbook-side-body{
+    @apply flex justify-between text-gray-500 bg-red-200 py-1 px-4 mb-2;
+}
+.profile-orderbook-side-body-two{
+    @apply flex justify-between text-gray-500 bg-green-200 py-1 px-4 mb-2;
+}
+.profile-orderbook-empty{
+    @apply text-gray-500 text-sm;
+}
+.profile-orders-con{
+    @apply bg-white text-gray-700 p-6 rounded-lg shadow;
+}
+.profile-orders-title{
+    @apply text-gray-800 font-bold text-lg mb-4;
+}
+.profile-orders-btncon{
+    @apply flex gap-2 mb-4;
+}
+.profile-orders-btn{
+    @apply border-b-2 px-3 py-1 cursor-pointer hover:text-blue-400 hover:border-blue-400 transition-all duration-400 ease-in-out;
+}
+.profile-orders-symbol-con{
+    @apply flex justify-between items-center;
+}
+.profile-orders-symbol{
+    @apply font-bold text-lg;
+}
+.profile-orders-date{
+    @apply text-xs text-gray-400;
+}
+.profile-orders-detail-con{
+    @apply flex justify-between gap-2 items-center;
+}
+.profile-orders-detail-title{
+    @apply text-gray-400;
+}
+.profile-orders-detail-body{
+    @apply font-semibold text-sm capitalize;
+}
+.profile-orders-detail-status{
+    @apply text-sm capitalize italic text-gray-500;
+}
+.profile-orders-empty{
+    @apply text-gray-500 text-sm mt-4;
+}
+.profile-orders-cancel-btn{
+    @apply cursor-pointer font-semibold rounded-lg px-2 py-1 text-sm text-white bg-red-500 border border-red-800 hover:bg-red-800 transition-all duration-400 ease-in-out;
 }
